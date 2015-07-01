@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test Objectify</title>
+</head>
+<body>
+
+	<form action="" id="form" novalidate>
+		<div>
+			<label for="first-name">First Name</label>
+			<input type="text" name="firstName" id="first-name" />
+		</div>
+		<div>
+			<label for="last-name">Last Name</label>
+			<input type="text" name="lastName" id="last-name" />
+		</div>
+		<div>
+			<label for="tel">Telephone Number</label>
+			<input type="tel" name="tele" id="tel" />
+		</div>
+		<button type="submit">Submit</button>
+	</form>
+	<div id="test"></div>
+
+	<script src="../bower_components/jquery/dist/jquery.js"></script>
+	<script src="../objectify.jquery.js"></script>
+	<script>
+		var $form = $('#form');
+		var $test = $('#test');
+
+		$form.on('submit', function (event) {
+			event.preventDefault();
+
+			console.log($form.serializeArray());
+			console.log($form.objectify());
+			console.log($form.objectify(['tele']));
+
+		});
+	</script>
+
+</body>
+</html>
