@@ -7,4 +7,5 @@ Returns form data as a javascript object using the input's name attribute for th
 Optionally takes an array of exclusions. These are the name attributes of inputs to exclude from the returned object.
 
 `var obj = $('#form-id').objectify();`
+
 `var obj = $('#form-id').objectify(['fieldOneName', 'fieldTwoName']);`
