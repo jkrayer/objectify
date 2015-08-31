@@ -17,8 +17,10 @@
       exclusions = exclusions || [];
 
       for (key in formData) {
-        if (exclusions.indexOf(formData[key].name) > -1) { continue; }
-        obj[formData[key].name] = formData[key].value;
+        if (formData.hasOwnProperty(key)) {
+          if (exclusions.indexOf(formData[key].name) > -1) { continue; }
+          obj[formData[key].name] = formData[key].value;
+        }
       }
 
       return obj;
