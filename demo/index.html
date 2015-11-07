@@ -1,43 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Test Objectify</title>
+  <meta charset="utf-8">
+  <title>Demo Objectify 0.0.2</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 </head>
 <body>
 
-	<form action="" id="form" novalidate>
-		<div>
-			<label for="first-name">First Name</label>
-			<input type="text" name="firstName" id="first-name" />
-		</div>
-		<div>
-			<label for="last-name">Last Name</label>
-			<input type="text" name="lastName" id="last-name" />
-		</div>
-		<div>
-			<label for="tel">Telephone Number</label>
-			<input type="tel" name="tele" id="tel" />
-		</div>
-		<button type="submit">Submit</button>
-	</form>
-	<div id="test"></div>
+<main class="container-fluid">
+  <div class="row" style="margin-bottom:50px;">
+    <div class="col-sm-6">
+      <form id="form-one" novalidate>
+        <div class="form-group">
+          <label for="first-name-one">First Name</label>
+          <input type="text" name="firstName" id="first-name-one" class="form-control" placeholder="First Name" />
+        </div>
+        <div class="form-group">
+          <label for="last-name-one">Last Name</label>
+          <input type="text" name="lastName" id="last-name-one" class="form-control" placeholder="Last Name" />
+        </div>
+        <div class="form-group">
+          <label for="tel-one">Telephone Number</label>
+          <input type="tel" name="tele" id="tel-one" class="form-control" placeholder="2125551212" />
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <pre id="output-one"></pre>
+    </div>
+  </div>
 
-	<script src="../bower_components/jquery/dist/jquery.js"></script>
-	<script src="../objectify.jquery.js"></script>
-	<script>
-		var $form = $('#form');
-		var $test = $('#test');
+  <div class="row" style="margin-bottom:50px;">
+    <div class="col-sm-6">
+      <form id="form-two" novalidate>
+        <input type="hidden" name="token" value="193854p8584G7f4" />
+        <input type="hidden" name="id" value="36" />
+        <div class="form-group">
+          <label for="first-name-two">First Name</label>
+          <input type="text" name="firstName" id="first-name-two" class="form-control" placeholder="First Name" />
+        </div>
+        <div class="form-group">
+          <label for="last-name-two">Last Name</label>
+          <input type="text" name="lastName" id="last-name-two" class="form-control" placeholder="Last Name" />
+        </div>
+        <div class="form-group">
+          <label for="tel-two">Telephone Number</label>
+          <input type="tel" name="tele" id="tel-two" class="form-control" placeholder="2125551212" />
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <pre id="output-two"></pre>
+    </div>
+  </div>
 
-		$form.on('submit', function (event) {
-			event.preventDefault();
+  <div class="row" style="margin-bottom:50px;">
+    <div class="col-sm-6">
+      <form id="form-three" novalidate>
+        <input type="hidden" name="token" value="193854p8584G7f4" />
+        <input type="hidden" name="id" value="36" />
+        <div class="form-group">
+          <label for="first-name-three">First Name</label>
+          <input type="text" name="firstName" id="first-name-three" class="form-control" placeholder="First Name" />
+        </div>
+        <div class="form-group">
+          <label for="last-name-three">Last Name</label>
+          <input type="text" name="lastName" id="last-name-three" class="form-control" placeholder="Last Name" />
+        </div>
+        <div class="form-group">
+          <label for="tel-three">Telephone Number</label>
+          <input type="tel" name="tele" id="tel-three" class="form-control" placeholder="2125551212" />
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <pre id="output-three"></pre>
+    </div>
+  </div>
 
-			console.log($form.serializeArray());
-			console.log($form.objectify());
-			console.log($form.objectify(['tele']));
+</main>
 
-		});
-	</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="../src/objectify.jquery.js"></script>
+  <script>
+    (function ($) {
+      var $formOne = $(document.getElementById('form-one')),
+          $outputOne = $(document.getElementById('output-one')),
+          $formTwo = $(document.getElementById('form-two')),
+          $outputTwo = $(document.getElementById('output-two')),
+          $formThree = $(document.getElementById('form-three')),
+          $outputThree = $(document.getElementById('output-three'));
+
+      function printObject (object) {
+        var string = "{\n",
+            key;
+        for (key in object) {
+          if (object.hasOwnProperty(key)) {
+            string += "  " + key + ": " + object[key] + ",\n";
+          }
+        }
+        string = string.slice(0, -2);
+        return string += "\n}";
+      }
+
+      $formOne.on('submit', function (event) {
+        event.preventDefault();
+        $outputOne.html(printObject($(this).objectify()));
+      });
+
+      $formTwo.on('submit', function (event) {
+        event.preventDefault();
+        $outputTwo.html(printObject($(this).objectify(['token'])));
+      });
+
+      $formThree.on('submit', function (event) {
+        event.preventDefault();
+        $outputThree.html(printObject($(this).objectify(['token'], {
+          tele: function (string) {
+            return [string.slice(0, 3), '-', string.slice(3, 6), '-', string.slice(6)].join('');
+          }
+        })));
+      });
+
+    }(jQuery));
+  </script>
 
 </body>
 </html>
