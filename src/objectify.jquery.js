@@ -1,29 +1,50 @@
 /**
  * Form data into javascript object
  * @author Jim Krayer <jameskrayer@yahoo.com>
- * @version 0.0.1
- * @internal review jQuery .serializeArray() and optimize
+ * @version 0.0.2
  */
 ;(function ($) {
 
-  'use strict';
+  var pluginName = "objectify",
+      defaults = {
+        exclusions: [],
+        sanitizations: false
+      };
 
-  $.fn.extend({
-    objectify: function (exclusions) {
-      var formData = $(this).serializeArray();
+  function Plugin (element, options) {
+    this.element = element;
+    this.options = $.extend({}, defaults, options);
+    this.init();
+  }
+
+  Plugin.prototype = {
+    init: function() {
+      var formData = $(this.element).serializeArray();
       var obj = {};
       var key;
-
-      exclusions = exclusions || [];
+      var name;
 
       for (key in formData) {
-        if (formData.hasOwnProperty(key)) {
-          if (exclusions.indexOf(formData[key].name) > -1) { continue; }
-          obj[formData[key].name] = formData[key].value;
+        name = formData[key].name;
+        if (exclusions.indexOf(name) > -1) {
+          continue;
         }
+        if (sanitize && sanitize.hasOwnProperty(name)) {
+          obj[name] = sanitize[name](formData[key].value);
+          continue;
+        }
+        obj[name] = formData[key].value;
       }
-
       return obj;
     }
-  });
+  };
+
+  $.fn[pluginName] = function (options) {
+    return this.each(function () {
+      if (!$.data(this, "plugin_" + pluginName)) {
+        $.data(this, "plugin_" + pluginName, new Plugin(this, options));
+      }
+    });
+  };
+
 }(jQuery));
