@@ -9,7 +9,7 @@
  *                             field name attribute
  * @return {object}            object of form data
  */
-function objectifyForm ($form, exclusions, sanitize) {
+function objectify ($form, exclusions, sanitize) {
   var formData = $form.serializeArray();
   var obj = {};
   var key;
