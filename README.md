@@ -2,12 +2,20 @@
 
 [![Code Climate](https://codeclimate.com/github/jkrayer/objectify/badges/gpa.svg)](https://codeclimate.com/github/jkrayer/objectify)
 
-Form data to javascript object
-
 Returns form data as a javascript object using the input's name attribute for the key and the value attribute for the value.
 
-Optionally takes an array of exclusions. These are the name attributes of inputs to exclude from the returned object.
+`.objectify(exclusions);` version added: 0.0.1
 
-`var obj = $('#form-id').objectify();`
+**exclusions**
+Type: Array
+An array of element name attributes to be excluded from the returned object.
 
-`var obj = $('#form-id').objectify(['fieldOneName', 'fieldTwoName']);`
+`.objectify(exclusions, sanitize);` version added 0.1.0
+
+**exclusions**
+Type: Array
+An array of element name attributes to be excluded from the returned object.
+
+**sanitize**
+Type: Object
+An object of functions matching one or more element name attributes. Functions take the input value as an attribute and should return modified data. This will be the value for that field in the returned object.
