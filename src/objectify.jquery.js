@@ -5,7 +5,11 @@
  */
 ;(function ($) {
 
-  'use strict';
+  var pluginName = "objectify",
+      defaults = {
+        exclusions: [],
+        sanitizations: false
+      };
 
   $.fn.extend({
     objectify: function (exclusions, sanitize) {
@@ -28,7 +32,6 @@
         }
         obj[name] = formData[key].value;
       }
-
       return obj;
     }
   });
