@@ -1,18 +1,12 @@
 /**
  * Form data into javascript object
  * @author Jim Krayer <jameskrayer@yahoo.com>
- * @version 0.0.2
+ * @version 0.1.0
  */
 ;(function ($) {
-
-  var pluginName = "objectify",
-      defaults = {
-        exclusions: [],
-        sanitizations: false
-      };
-
   $.fn.extend({
     objectify: function (exclusions, sanitize) {
+
       var formData = $(this).serializeArray();
       var obj = {};
       var key;
