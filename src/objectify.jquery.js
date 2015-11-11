@@ -16,6 +16,7 @@
       sanitize = sanitize || false;
 
       for (key in formData) {
+        if (!object.hasOwnProperty(key)) { continue; }
         name = formData[key].name;
         if (exclusions.indexOf(name) > -1) {
           continue;

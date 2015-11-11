@@ -28,6 +28,7 @@ function objectify (form, exclusions, sanitize) {
   (function getAllInputs (object) {
     var key;
     for (key in object) {
+      if (!object.hasOwnProperty(key)) { continue; }
       if (object[key].nodeType !== 1) { continue; } //skip non-element nodes
       if (inputTags.test(object[key].nodeName)) {
         formInputs.push(object[key]);
@@ -53,6 +54,7 @@ function objectify (form, exclusions, sanitize) {
 
   //sanitize
   for (key in formInputs) {
+    if (!object.hasOwnProperty(key)) { continue; }
     name = formInputs[key].name;
     value = formInputs[key].value;
     obj[name] = (sanitize && sanitize.hasOwnProperty(name)) ? sanitize[name](value) : value;
