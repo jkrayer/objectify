@@ -28,6 +28,7 @@ function objectify (form, exclusions, sanitize) {
   (function getAllInputs (object) {
     var key;
     for (key in object) {
+      if (object[key].nodeType !== 1) { continue; } //skip non-element nodes
       if (inputTags.test(object[key].nodeName)) {
         formInputs.push(object[key]);
         continue;
@@ -47,7 +48,7 @@ function objectify (form, exclusions, sanitize) {
       && inputTags.test(input.nodeName)
       && !/^(?:submit|button|image|reset|file)$/i.test(type)
       && (input.checked || !/^(?:checkbox|radio)$/i.test(type))
-      && exclusions.indexOf(name) > -1
+      && exclusions.indexOf(name) === -1
   });
 
   //sanitize
