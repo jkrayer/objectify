@@ -1,7 +1,7 @@
 {
   "name": "objectify",
   "description": "Returns form data as a javascript object using the input's name attribute for the key and the value attribute for the value.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": [
     "src/objectify.jquery.js"
   ],

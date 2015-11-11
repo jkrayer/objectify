@@ -1,7 +1,7 @@
 /**
  * Form data into javascript object
  * @author Jim Krayer <jameskrayer@yahoo.com>
- * @version 0.1.0
+ * @version 0.1.1
  */
 ;(function ($) {
   $.fn.extend({

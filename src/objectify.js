@@ -1,7 +1,7 @@
 /**
  * Form data into javascript object
  * @author Jim Krayer <jameskrayer@yahoo.com>
- * @version 0.1.0
+ * @version 0.1.1
  * @param  {object} $form      jQuery form object
  * @param  {array}  exclusions a list of field to exclude in the return, must
  *                             match field name attribute
