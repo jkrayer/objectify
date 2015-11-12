@@ -1,0 +1,30 @@
+{
+  "name": "objectify",
+  "version": "0.1.1",
+  "description": "Returns form data as a javascript object using the input's name attribute for the key and the value attribute for the value.",
+  "scripts": {
+    "lint": "eslint src/**",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkrayer/objectify.git"
+  },
+  "keywords": [
+    "form",
+    "object",
+    "jquery"
+  ],
+  "author": "Jim Krayer <jameskrayer@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jkrayer/objectify/issues"
+  },
+  "homepage": "https://github.com/jkrayer/objectify#readme",
+  "dependencies": {
+    "jquery": ">1.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^1.9.0"
+  }
+}
