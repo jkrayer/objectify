@@ -14,7 +14,7 @@ Type: Array
 
 An array of element name attributes to be excluded from the returned object.
 
-`.objectify(exclusions, sanitize);` version added 0.1.0
+`.objectify(exclusions, sanitize);` version added 0.1.1
 
 **exclusions**
 
