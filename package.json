@@ -2,6 +2,7 @@
   "name": "objectify",
   "version": "0.1.1",
   "description": "Returns form data as a javascript object using the input's name attribute for the key and the value attribute for the value.",
+  "main":"src/objectify.js",
   "scripts": {
     "lint": "eslint src/**",
     "lint:watch": "esw  -w src/**",
