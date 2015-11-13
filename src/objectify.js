@@ -62,3 +62,7 @@ function objectify (form, exclusions, sanitize) {
 
   return obj;
 }
+
+if (typeof module === 'object' && typeof exports === 'object') {
+  module.exports = objectify;
+}
