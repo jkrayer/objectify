@@ -8,7 +8,6 @@
  * @param  {object} sanitize   object of sanitize functions to run, must match
  *                             field name attribute
  * @return {object}            object of form data
- */
 function objectify (form, exclusions, sanitize) {
   var formInputs= [];
   var inputTags = /^(?:input|select|textarea|keygen)/i;
@@ -66,3 +65,109 @@ function objectify (form, exclusions, sanitize) {
 if (typeof module === 'object' && typeof exports === 'object') {
   module.exports = objectify;
 }
+*/
+
+
+
+
+/**
+ * Turn form into javascript object
+ * @param  {object} form dom element
+ * @return {object}      javascript object
+ */
+
+
+
+
+
+
+
+
+
+
+(function objectify(window) {
+
+  function Objectify(form, exclusions, sanitize) {
+    this.form = form;
+    this.exclusions = exclusions;
+    this.sanitize = sanitize;
+    this.obj = {};
+    this.currentElement;
+
+    return this.getValues();
+  }
+
+  // Needed to handle below types that are not currently addressed
+  //Objectify.prototype.multiSelects = ['checkbox', 'radio', 'select-multiple'];
+
+  Objectify.prototype.getValues = function getValues() {
+    var elements = this.form.elements;
+
+    for (var i = 0; i < elements.length; i++) {
+      this.currentElement = elements[i];
+
+      if (this.exclusions.indexOf(this.currentElement.name) === -1 ) {
+        continue;
+      }
+
+      switch(this.currentElement.tagName) {
+        case 'BUTTON':
+          continue;
+          break;
+        case 'INPUT':
+          switch(this.currentElement.type) {
+            case 'button':
+            case 'submit':
+            case 'reset':
+              continue;
+              break;
+            case 'checkbox': // additive
+            case 'radio': //one only
+              this.setCheckValues();
+              break;
+            default:
+              this.setValue();
+              break;
+          }
+          break;
+        default:
+          this.setValue();
+          break;
+      }
+    }
+    return this.obj;
+  };
+
+  Objectify.prototype.setValue = function setValue() {
+    return this.obj[this.currentElement.name] = this.getSanitizedValue;
+  };
+
+  Objectify.prototype.setCheckValues = function setCheckValues() {
+    if (form.elements[i].checked) {
+      q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
+    }
+  };
+
+  Objectify.prototype.getSanitizedValue = function getSanitizedValue() {
+    var name = this.currentElement.name;
+    if (typeof this.sanitize[name] === 'function') {
+      return this.sanitize[name](this.currentElement.value);
+    }
+    return this.currentElement.value;
+  };
+
+  function objectify(form, exclusions, sanitize) {
+    if (typeof form !== 'object' && form.nodeName === undefined && form.nodeName !== 'FORM') {
+      console.error('A form element was not passed as the first argument of objectify.');
+      return false;
+    }
+
+    exclusions = exclusions || [];
+    sanitize = sanitize || {};
+
+    return new Objectify(form, exclusions, sanitize);
+  }
+
+  return window.objectify = objectify;
+
+}(window));
