@@ -121,8 +121,8 @@ if (typeof module === 'object' && typeof exports === 'object') {
             case 'reset':
               continue;
               break;
-            case 'checkbox': // additive
-            case 'radio': //one only
+            case 'checkbox':
+            case 'radio':
               this.setCheckValues();
               break;
             default:
@@ -139,12 +139,19 @@ if (typeof module === 'object' && typeof exports === 'object') {
   };
 
   Objectify.prototype.setValue = function setValue() {
-    return this.obj[this.currentElement.name] = this.getSanitizedValue;
+    if (!this.obj.hasOwnProperty(this.currentElement.name)) {
+      this.obj[this.currentElement.name] = this.getSanitizedValue();
+    }
+    console.warn('Duplicate name attribute (' + this.currentElement.name + ') found in form. Value not saved.');
   };
 
   Objectify.prototype.setCheckValues = function setCheckValues() {
-    if (form.elements[i].checked) {
-      q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
+    if (this.currentElement.checked) {
+      if (this.obj.hasOwnProperty(this.currentElement.name)) {
+        this.obj[this.currentElement.name].push(this.getSanitizedValue());
+      }
+      this.obj[this.currentElement.name] = this.currentElement.type === 'radio' ? this.getSanitizedValue()
+                                                                                : [this.getSanitizedValue()];
     }
   };
 
