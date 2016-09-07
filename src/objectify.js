@@ -15,7 +15,7 @@
     var i = 0;
     for (i; i < count; i++) {
       this.currentElement = elements[i];
-      if (this.exclusions.indexOf(this.currentElement.name) === -1 ) {
+      if (this.exclusions.indexOf(this.currentElement.name) > -1 ) {
         continue;
       }
       switch(this.currentElement.tagName) {
