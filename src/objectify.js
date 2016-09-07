@@ -6,20 +6,18 @@
     this.sanitize = sanitize;
     this.obj = {};
     this.currentElement;
-
     return this.getValues();
   }
 
   Objectify.prototype.getValues = function getValues() {
     var elements = this.form.elements;
-
-    for (var i = 0; i < elements.length; i++) {
+    var count = elements.length;
+    var i = 0;
+    for (i; i < count; i++) {
       this.currentElement = elements[i];
-
       if (this.exclusions.indexOf(this.currentElement.name) === -1 ) {
         continue;
       }
-
       switch(this.currentElement.tagName) {
         case 'BUTTON':
           continue;
@@ -47,7 +45,7 @@
               break;
             default:
               this.setValue();
-            break;
+              break;
           }
           break;
         default:
@@ -59,10 +57,9 @@
   };
 
   Objectify.prototype.setValue = function setValue() {
-    if (!this.obj.hasOwnProperty(this.currentElement.name)) {
-      return this.obj[this.currentElement.name] = this.getSanitizedValue();
+    if (!this.hasKey()) {
+      this.obj[this.currentElement.name] = this.getSanitizedValue();
     }
-    console.warn('Duplicate name attribute (' + this.currentElement.name + ') found in form. Value not saved.');
   };
 
   Objectify.prototype.setCheckValues = function setCheckValues() {
@@ -76,18 +73,19 @@
   };
 
   Objectify.prototype.setMultipleValues = function setMultipleValues() {
-    var name = this.currentElement.name;
-    if (!this.obj.hasOwnProperty(name)) {
+    var count = this.currentElement.options.length;
+    var name = '';
+    var i = 0
+    if (!this.hasKey()) {
+      name = this.currentElement.name;
       this.obj[name] = [];
-      for(var i = 0; i < this.currentElement.options.length; i++) {
+      for(i; i < count; i++) {
         if (this.currentElement.options[i].selected) {
           this.currentElement = this.currentElement.options[i];
           this.obj[name].push(this.getSanitizedValue());
         }
       }
-      return;
     }
-    console.warn('Duplicate name attribute (' + this.currentElement.name + ') found in form. Value not saved.');
   };
 
   Objectify.prototype.getSanitizedValue = function getSanitizedValue() {
@@ -96,6 +94,14 @@
       return this.sanitize[name](this.currentElement.value);
     }
     return this.currentElement.value;
+  };
+
+  Objectify.prototype.hasKey = function hasKey() {
+    if (this.obj.hasOwnProperty(this.currentElement.name)) {
+      console.warn('Duplicate name attribute (' + this.currentElement.name + ') found in form. Value not saved.');
+      return true;
+    }
+    return false;
   };
 
   function objectify(form, exclusions, sanitize) {
