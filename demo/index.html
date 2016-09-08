@@ -143,8 +143,7 @@
           <textarea name="lyrics" id="lyrics" rows="8" cols="40">Nobody gives a damn about anybody else,
 Think everyone should feel the way they fell themselves,
 Rich men think that happiness is a million dollar bills,
-So how come most of them O. D. on sleeping pills,
-          </textarea>
+So how come most of them O. D. on sleeping pills...</textarea>
         </div>
 
       </form>
@@ -163,8 +162,9 @@ So how come most of them O. D. on sleeping pills,
       function format(obj) {
         var txt = '{\n';
         for (var key in obj) {
-          txt += ['  ', key, ':', ' ', obj[key], ',', '\n'].join('');
+          txt += ['  ', key, ':', ' "', obj[key], '",', '\n'].join('');
         }
+        txt = txt.replace(/,\n$/, '\n');
         return txt += '}';
       }
 
