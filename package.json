@@ -1,6 +1,6 @@
 {
   "name": "objectify",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Returns form data as a javascript object using the input's name attribute for the key and the value attribute for the value.",
   "main": "src/objectify.js",
   "scripts": {
@@ -23,12 +23,10 @@
     "url": "https://github.com/jkrayer/objectify/issues"
   },
   "homepage": "https://github.com/jkrayer/objectify#readme",
-  "dependencies": {
-    "jquery": ">1.7.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint": "^1.9.0",
-    "eslint-watch": "^2.1.3",
+    "eslint": "3.4.0",
+    "eslint-watch": "2.1.14",
     "jsdom": "^7.0.2",
     "mocha": "^2.3.3"
   }

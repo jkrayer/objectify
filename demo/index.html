@@ -105,7 +105,7 @@
           <input type="image" name="imageInput" value="Input Image" src="/assets/img/noimage.png" class="btn btn-default" />
         </div>
 
-        <fieldset>
+        <fieldset class="form-group">
           <legend>Select all that apply?</legend>
           <label class="checkbox-inline"><input type="checkbox" name="bands" value="Metallica" checked /> Metallica</label>
           <label class="checkbox-inline"><input type="checkbox" name="bands" value="Megadeth" checked /> Megadeth</label>
@@ -113,12 +113,21 @@
           <label class="checkbox-inline"><input type="checkbox" name="bands" value="Creed" /> Creed</label>
         </fieldset>
 
-        <fieldset>
+        <fieldset class="form-group">
           <legend>Select one that appies?</legend>
           <label class="radio-inline"><input type="radio" name="genre" value="Metal" checked /> Metal</label>
           <label class="radio-inline"><input type="radio" name="genre" value="Pop" /> Pop</label>
           <label class="radio-inline"><input type="radio" name="genre" value="Country" /> Country</label>
         </fieldset>
+
+        <div class="form-group">
+          <label for="headphones">Headphones</label>
+          <select class="form-control" name="headphones" id="headphones">
+            <option value="Beats">Beats</option>
+            <option value="Motorheadphones" selected="">Mot&#246;rheadphones</option>
+            <option value="Skull Candy">Skull Candy</option>
+          </select>
+        </div>
 
       </form>
     </div>
