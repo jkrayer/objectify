@@ -1,3 +1,6 @@
 {
-  "extends": "defaults"
+  "extends": "defaults",
+  "env": {
+      "browser": true
+    }
 }
