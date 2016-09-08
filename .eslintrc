@@ -1,6 +1,9 @@
 {
   "extends": "defaults",
   "env": {
-      "browser": true
-    }
+    "browser": true
+  },
+  "rules": {
+    "no-console": ["error", { allow: ["warn", "error"] }]
+  }
 }
