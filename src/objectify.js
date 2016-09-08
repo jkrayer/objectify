@@ -22,14 +22,12 @@
         case 'BUTTON':
         case 'FIELDSET':
           continue;
-          break;
         case 'INPUT':
           switch(this.currentElement.type) {
             case 'button':
             case 'submit':
             case 'reset':
               continue;
-              break;
             case 'checkbox':
             case 'radio':
               this.setCheckValues();
