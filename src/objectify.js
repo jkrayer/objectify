@@ -74,6 +74,7 @@
   };
 
   Objectify.prototype.setMultipleValues = function setMultipleValues() {
+    var select = this.currentElement;
     var count = this.currentElement.options.length;
     var name = '';
     var i = 0
@@ -81,8 +82,8 @@
       name = this.currentElement.name;
       this.obj[name] = [];
       for(i; i < count; i++) {
-        if (this.currentElement.options[i].selected) {
-          this.currentElement = this.currentElement.options[i];
+        this.currentElement = select.options[i];
+        if (this.currentElement.selected) {
           this.obj[name].push(this.getSanitizedValue());
         }
       }
