@@ -20,6 +20,7 @@
       }
       switch(this.currentElement.tagName) {
         case 'BUTTON':
+        case 'FIELDSET':
           continue;
           break;
         case 'INPUT':
@@ -65,7 +66,7 @@
   Objectify.prototype.setCheckValues = function setCheckValues() {
     if (this.currentElement.checked) {
       if (this.obj.hasOwnProperty(this.currentElement.name)) {
-        this.obj[this.currentElement.name].push(this.getSanitizedValue());
+        return this.obj[this.currentElement.name].push(this.getSanitizedValue());
       }
       this.obj[this.currentElement.name] = this.currentElement.type === 'radio' ? this.getSanitizedValue()
                                                                                 : [this.getSanitizedValue()];
