@@ -3,247 +3,137 @@
 <head>
   <meta charset="utf-8">
   <title>Demo Objectify</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
 
 <main class="container-fluid">
-  <h2>$.objectify</h2>
+  <h1>objectify</h1>
   <div class="row" style="margin-bottom:50px;">
     <div class="col-sm-6">
       <form id="form-one" novalidate>
         <div class="form-group">
-          <label for="first-name-one">First Name</label>
-          <input type="text" name="firstName" value="John" id="first-name-one" class="form-control" placeholder="First Name" />
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+
+        <input type="hidden" name="hiddenField" value="Hidden Field Value">
+
         <div class="form-group">
-          <label for="last-name-one">Last Name</label>
-          <input type="text" name="lastName" value="Doe" id="last-name-one" class="form-control" placeholder="Last Name" />
+          <label for="name">Name</label>
+          <input type="text" name="name" value="John Doe" id="name" class="form-control" placeholder="Name" />
         </div>
+
         <div class="form-group">
-          <label for="tel-one">Telephone Number</label>
-          <input type="tel" name="tele" value="2125551212" id="tel-one" class="form-control" placeholder="2125551212" />
+          <label for="readonly">Readonly</label>
+          <input type="text" name="readOnly" value="Read Only" id="readonly" class="form-control" readonly />
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+
+        <div class="form-group">
+          <label for="disabled">Disabled</label>
+          <input type="text" name="disabled" value="Disabled Field" id="readonly" class="form-control" disabled="true" />
+        </div>
+
+        <div class="form-group">
+          <label for="tel">Telephone Number</label>
+          <input type="tel" name="tel" value="2125551212" id="tel" class="form-control" placeholder="2125551212" />
+        </div>
+
+        <div class="form-group">
+          <label for="color">Color</label>
+          <input type="color" name="color" value="#0085bf" id="color" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" name="date" value="1974-03-16" id="date" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="datetime">Date Time</label>
+          <input type="datetime" name="datetime" value="1974-03-16T22:00:00" id="datetime" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="datetime-local">Date Time Local</label>
+          <input type="datetime-local" name="datetime-local" value="1974-03-16T22:00:00" id="datetime-local" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" value="jdoe@gmail.com" id="email" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="month">Month</label>
+          <input type="month" name="month" value="2016-02" id="month" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="week">Week</label>
+          <input type="week" name="week" value="2016-W27" id="week" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="number">Number</label>
+          <input type="number" name="number" value="5" id="number" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="range">Range</label>
+          <input type="range" name="range" value="500" id="range" class="form-control" min="1" max="1000" step="1" />
+        </div>
+
+        <div class="form-group">
+          <label for="search">Search</label>
+          <input type="search" name="search" value="Search Input" id="search" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="time">Time</label>
+          <input type="time" name="time" value="01:59:27" id="time" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="url">URL</label>
+          <input type="url" name="url" value="http://www.example.com" id="url" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <input type="submit" name="submitInput" value="Input Submit" class="btn btn-default" />
+          <input type="reset" name="resetInput" value="Input Reset" class="btn btn-default" />
+          <input type="button" name="buttonInput" value="Input Button" class="btn btn-default" />
+          <input type="image" name="imageInput" value="Input Image" src="/assets/img/noimage.png" class="btn btn-default" />
+        </div>
       </form>
     </div>
     <div class="col-sm-6">
       <pre id="output-one"></pre>
     </div>
   </div>
-
-  <div class="row" style="margin-bottom:50px;">
-    <div class="col-sm-6">
-      <form id="form-two" novalidate>
-        <input type="hidden" name="token" value="193854p8584G7f4" />
-        <input type="hidden" name="id" value="36" />
-        <div class="form-group">
-          <label for="first-name-two">First Name</label>
-          <input type="text" name="firstName" value="John" id="first-name-two" class="form-control" placeholder="First Name" />
-        </div>
-        <div class="form-group">
-          <label for="last-name-two">Last Name</label>
-          <input type="text" name="lastName" value="Doe" id="last-name-two" class="form-control" placeholder="Last Name" />
-        </div>
-        <div class="form-group">
-          <label for="tel-two">Telephone Number</label>
-          <input type="tel" name="tele" value="2125551212" id="tel-two" class="form-control" placeholder="2125551212" />
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-    </div>
-    <div class="col-sm-6">
-      <pre id="output-two"></pre>
-    </div>
-  </div>
-
-  <div class="row" style="margin-bottom:50px;">
-    <div class="col-sm-6">
-      <form id="form-three" novalidate>
-        <input type="hidden" name="token" value="193854p8584G7f4" />
-        <input type="hidden" name="id" value="36" />
-        <div class="form-group">
-          <label for="first-name-three">First Name</label>
-          <input type="text" name="firstName" value="John" id="first-name-three" class="form-control" placeholder="First Name" />
-        </div>
-        <div class="form-group">
-          <label for="last-name-three">Last Name</label>
-          <input type="text" name="lastName" value="Doe" id="last-name-three" class="form-control" placeholder="Last Name" />
-        </div>
-        <div class="form-group">
-          <label for="tel-three">Telephone Number</label>
-          <input type="tel" name="tele" value="2125551212" id="tel-three" class="form-control" placeholder="2125551212" />
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-    </div>
-    <div class="col-sm-6">
-      <pre id="output-three"></pre>
-    </div>
-  </div>
-
-  <h2>window.objectify</h2>
-  <div class="row" style="margin-bottom:50px;">
-    <div class="col-sm-6">
-      <form id="form-four" novalidate>
-        <div class="form-group">
-          <label for="first-name-four">First Name</label>
-          <input type="text" name="firstName" value="John" id="first-name-four" class="form-control" placeholder="First Name" />
-        </div>
-        <div class="form-group">
-          <label for="last-name-four">Last Name</label>
-          <input type="text" name="lastName" value="Doe" id="last-name-four" class="form-control" placeholder="Last Name" />
-        </div>
-        <div class="form-group">
-          <label for="tel-four">Telephone Number</label>
-          <input type="tel" name="tele" value="2125551212" id="tel-four" class="form-control" placeholder="2125551212" />
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-    </div>
-    <div class="col-sm-6">
-      <pre id="output-four"></pre>
-    </div>
-  </div>
-
-  <div class="row" style="margin-bottom:50px;">
-    <div class="col-sm-6">
-      <form id="form-five" novalidate>
-        <input type="hidden" name="token" value="193854p8584G7f4" />
-        <input type="hidden" name="id" value="36" />
-        <div class="form-group">
-          <label for="first-name-five">First Name</label>
-          <input type="text" name="firstName" value="John" id="first-name-five" class="form-control" placeholder="First Name" />
-        </div>
-        <div class="form-group">
-          <label for="last-name-five">Last Name</label>
-          <input type="text" name="lastName" value="Doe" id="last-name-five" class="form-control" placeholder="Last Name" />
-        </div>
-        <div class="form-group">
-          <label for="tel-five">Telephone Number</label>
-          <input type="tel" name="tele" value="2125551212" id="tel-five" class="form-control" placeholder="2125551212" />
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-    </div>
-    <div class="col-sm-6">
-      <pre id="output-five"></pre>
-    </div>
-  </div>
-
-  <div class="row" style="margin-bottom:50px;">
-    <div class="col-sm-6">
-      <form id="form-six" novalidate>
-        <input type="hidden" name="token" value="193854p8584G7f4" />
-        <input type="hidden" name="id" value="36" />
-        <div class="form-group">
-          <label for="first-name-six">First Name</label>
-          <input type="text" name="firstName" value="John" id="first-name-six" class="form-control" placeholder="First Name" />
-        </div>
-        <div class="form-group">
-          <label for="last-name-six">Last Name</label>
-          <input type="text" name="lastName" value="Doe" id="last-name-six" class="form-control" placeholder="Last Name" />
-        </div>
-        <div class="form-group">
-          <label for="tel-six">Telephone Number</label>
-          <input type="tel" name="tele" value="2125551212" id="tel-six" class="form-control" placeholder="2125551212" />
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-    </div>
-    <div class="col-sm-6">
-      <pre id="output-six"></pre>
-    </div>
-  </div>
 </main>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="../src/objectify.jquery.js"></script>
-  <script>
-    (function ($) {
-      var $formOne = $(document.getElementById('form-one')),
-          $outputOne = $(document.getElementById('output-one')),
-          $formTwo = $(document.getElementById('form-two')),
-          $outputTwo = $(document.getElementById('output-two')),
-          $formThree = $(document.getElementById('form-three')),
-          $outputThree = $(document.getElementById('output-three'));
-
-      function printObject (object) {
-        var string = "{\n",
-            key;
-        for (key in object) {
-          if (object.hasOwnProperty(key)) {
-            string += "  " + key + ": " + object[key] + ",\n";
-          }
-        }
-        string = string.slice(0, -2);
-        return string += "\n}";
-      }
-
-      $formOne.on('submit', function (event) {
-        event.preventDefault();
-        $outputOne.html(printObject($(this).objectify()));
-      });
-
-      $formTwo.on('submit', function (event) {
-        event.preventDefault();
-        $outputTwo.html(printObject($(this).objectify(['token'])));
-      });
-
-      $formThree.on('submit', function (event) {
-        event.preventDefault();
-        $outputThree.html(printObject($(this).objectify(['token'], {
-          tele: function (string) {
-            return [string.slice(0, 3), '-', string.slice(3, 6), '-', string.slice(6)].join('');
-          }
-        })));
-      });
-
-    }(jQuery));
-  </script>
 
   <script src="../src/objectify.js"></script>
   <script>
-    (function ($) {
-      var formFour = document.getElementById('form-four'),
-          $outputFour = $(document.getElementById('output-four')),
-          formFive = document.getElementById('form-five'),
-          $outputFive = $(document.getElementById('output-five')),
-          formSix = document.getElementById('form-six'),
-          $outputSix = $(document.getElementById('output-six'));
+    (function() {
+      var formOne = document.getElementById('form-one');
 
-      function printObject (object) {
-        var string = "{\n",
-            key;
-        for (key in object) {
-          if (object.hasOwnProperty(key)) {
-            string += "  " + key + ": " + object[key] + ",\n";
-          }
+      function format(obj) {
+        var txt = '{\n';
+        for (var key in obj) {
+          txt += ['  ', key, ':', ' ', obj[key], ',', '\n'].join('');
         }
-        string = string.slice(0, -2);
-        return string += "\n}";
+        return txt += '}';
       }
 
-      $(formFour).on('submit', function (event) {
+      function getObject(event) {
         event.preventDefault();
-        $outputFour.html(printObject(objectify(formFour)));
-      });
+        var id = this.id.replace('form', 'output');
+        var output = document.getElementById(id);
+        output.textContent = format(objectify(this));
+      }
 
-      $(formFive).on('submit', function (event) {
-        event.preventDefault();
-        $outputFive.html(printObject(objectify(formFive, ['token'])));
-      });
-
-      $(formSix).on('submit', function (event) {
-        event.preventDefault();
-        $outputSix.html(printObject(objectify(formSix, ['token'], {
-          tele: function (string) {
-            return [string.slice(0, 3), '-', string.slice(3, 6), '-', string.slice(6)].join('');
-          }
-        })));
-      });
-
-    }(jQuery));
+      formOne.addEventListener('submit', getObject, false);
+    }());
   </script>
 
 </body>
