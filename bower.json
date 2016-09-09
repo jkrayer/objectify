@@ -1,0 +1,21 @@
+{
+  "name": "objectify",
+  "description": "Returns form data as a javascript object using the input's name attribute for the key.",
+  "main": "src/objectify.js",
+  "authors": [
+    "Jim Krayer <jameskrayer@yahoo.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "form",
+    "object"
+  ],
+  "homepage": "https://github.com/jkrayer/objectify",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
