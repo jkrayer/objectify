@@ -114,6 +114,6 @@
     return new Objectify(form, exclusions, sanitize);
   }
 
-  return window.objectify = window.objectify ? window.objectify : objectify;
+  return window.objectify = objectify;
 
 }(window));
