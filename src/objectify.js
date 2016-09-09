@@ -1,11 +1,11 @@
-(function objectify(window) {
+(function (window) {
 
   function Objectify(form, exclusions, sanitize) {
     this.form = form;
     this.exclusions = exclusions;
     this.sanitize = sanitize;
     this.obj = {};
-    this.currentElement;
+    this.currentElement = null;
     return this.getValues();
   }
 
@@ -75,7 +75,7 @@
     var select = this.currentElement;
     var count = this.currentElement.options.length;
     var name = '';
-    var i = 0
+    var i = 0;
     if (!this.hasKey()) {
       name = this.currentElement.name;
       this.obj[name] = [];
@@ -114,6 +114,6 @@
     return new Objectify(form, exclusions, sanitize);
   }
 
-  return window.objectify = objectify;
+  return window.objectify = window.objectify ? window.objectify : objectify;
 
 }(window));
