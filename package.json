@@ -23,8 +23,10 @@
   "homepage": "https://github.com/jkrayer/objectify#readme",
   "dependencies": {},
   "devDependencies": {
+    "chai": "3.5.0",
     "eslint": "3.4.0",
     "eslint-config-defaults": "9.0.0",
-    "eslint-watch": "2.1.14"
+    "eslint-watch": "2.1.14",
+    "mocha": "3.0.2"
   }
 }
