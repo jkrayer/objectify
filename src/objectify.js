@@ -1,3 +1,4 @@
+/*! Objectify 0.2.1 */
 (function (window) {
 
   function Objectify(form, exclusions, sanitize) {

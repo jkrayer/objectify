@@ -1,6 +1,6 @@
 {
   "name": "objectify",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Returns form data as a javascript object using the input's name attribute for the key.",
   "main": "src/objectify.js",
   "scripts": {
@@ -23,8 +23,10 @@
   "homepage": "https://github.com/jkrayer/objectify#readme",
   "dependencies": {},
   "devDependencies": {
+    "chai": "3.5.0",
     "eslint": "3.4.0",
     "eslint-config-defaults": "9.0.0",
-    "eslint-watch": "2.1.14"
+    "eslint-watch": "2.1.14",
+    "mocha": "3.0.2"
   }
 }

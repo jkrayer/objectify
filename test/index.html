@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Test Objectify</title>
+  <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+</head>
+<body>
+
+<form id="form-one" novalidate style="display:none;">
+  <input type="hidden" name="hiddenField" value="Hidden Field Value">
+  <input type="text" name="name" value="John Doe" placeholder="Name" />
+  <input type="text" name="readOnly" value="Read Only" readonly />
+  <input type="text" name="disabled" value="Disabled Field" disabled="true" />
+  <input type="tel" name="tel" value="2125551212" placeholder="2125551212" />
+  <input type="color" name="color" value="#0085bf" />
+  <input type="date" name="date" value="1974-03-16" />
+  <input type="datetime" name="datetime" value="1974-03-16T22:00:00" />
+  <input type="datetime-local" name="datetime-local" value="1974-03-16T22:00:00" />
+  <input type="email" name="email" value="jdoe@gmail.com" />
+  <input type="month" name="month" value="2016-02" />
+  <input type="week" name="week" value="2016-W27" />
+  <input type="number" name="number" value="5" />
+  <input type="range" name="range" value="500" min="1" max="1000" step="1" />
+  <input type="search" name="search" value="Search Input" />
+  <input type="time" name="time" value="01:59:27" />
+  <input type="url" name="url" value="http://www.example.com" />
+  <input type="submit" name="submitInput" value="Input Submit" />
+  <input type="reset" name="resetInput" value="Input Reset" />
+  <input type="button" name="buttonInput" value="Input Button" />
+  <input type="image" name="imageInput" value="Input Image" src="/assets/img/noimage.png" />
+  <fieldset>
+    <legend>Select all that apply?</legend>
+    <input type="checkbox" name="bands" value="Metallica" checked />
+    <input type="checkbox" name="bands" value="Megadeth" checked />
+    <input type="checkbox" name="bands" value="Slayer" checked />
+    <input type="checkbox" name="bands" value="Creed" />
+  </fieldset>
+  <fieldset>
+    <legend>Select one that appies?</legend>
+    <input type="radio" name="genre" value="Metal" checked />
+    <input type="radio" name="genre" value="Pop" />
+    <input type="radio" name="genre" value="Country" />
+  </fieldset>
+  <select name="headphones">
+    <option value="Beats">Beats</option>
+    <option value="Motorheadphones" selected="">Mot&#246;rheadphones</option>
+    <option value="Skull Candy">Skull Candy</option>
+  </select>
+  <select multiple name="player">
+    <option value="Computer" selected="">Computer</option>
+    <option value="Portable" selected="">Portable</option>
+    <option value="Stereo">Stereo</option>
+  </select>
+  <textarea name="lyrics" rows="8" cols="40">Nobody gives a damn about anybody else,
+Think everyone should feel the way they fell themselves,
+Rich men think that happiness is a million dollar bills,
+So how come most of them O. D. on sleeping pills...</textarea>
+</form>
+
+<div id="mocha"></div>
+
+  <script src="../src/objectify.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>
+      mocha.ui('bdd');
+      mocha.reporter('html');
+      var assert = chai.assert;
+      var form = document.getElementsByTagName('form')[0];
+
+      describe('Objectify', () => {
+        describe('Get Simple Form Data', function () {
+          const actualResult = objectify(form);
+
+          it('should return an object', function () {
+            assert.isObject(actualResult);
+          });
+          it('should contain data from a hidden form field', () => {
+            assert.strictEqual(actualResult.hiddenField, 'Hidden Field Value');
+          });
+          it('should contain a `name` value from a text input', () => {
+            assert.strictEqual(actualResult.name, 'John Doe');
+          });
+          it('should contain a `read only` value from a readOnly text field', () => {
+            assert.strictEqual(actualResult.readOnly, 'Read Only');
+          });
+          it('should contain a `disabled` value from a disabled field', () => {
+            assert.strictEqual(actualResult.disabled, 'Disabled Field');
+          });
+          it('should contain the value of a `tel` field', () => {
+            assert.strictEqual(actualResult.tel, '2125551212');
+          });
+          it('should contain the value of a `color` field', () => {
+            assert.strictEqual(actualResult.color, '#0085bf');
+          });
+          it('should contain the value of a `date` field', () => {
+            assert.strictEqual(actualResult.date, '1974-03-16');
+          });
+          it('should contain the value of a `datetime` field', () => {
+            assert.strictEqual(actualResult.datetime, '1974-03-16T22:00:00');
+          });
+          it('should contain the value of a `datetime-local` field', () => {
+            assert.strictEqual(actualResult['datetime-local'], '1974-03-16T22:00:00');
+          });
+          it('should contain the value of an `email` field', () => {
+            assert.strictEqual(actualResult.email, 'jdoe@gmail.com');
+          });
+          it('should contain the value of a `month` field', () => {
+            assert.strictEqual(actualResult.month, '2016-02');
+          });
+          it('should contain the value of a `week` field', () => {
+            assert.strictEqual(actualResult.week, '2016-W27');
+          });
+          it('should contain the value of a `number` field', () => {
+            assert.strictEqual(actualResult.number, '5');
+          });
+          it('should contain the value of a `range` field', () => {
+            assert.strictEqual(actualResult.range, '500');
+          });
+          it('should contain the value of a `search` field', () => {
+            assert.strictEqual(actualResult.search, 'Search Input');
+          });
+          it('should contain the value of a `time` field', () => {
+            assert.strictEqual(actualResult.time, '01:59:27');
+          });
+          it('should contain the value of a `url` field', () => {
+            assert.strictEqual(actualResult.url, 'http://www.example.com');
+          });
+          it('should store an array of values from a group of check boxes', () => {
+            assert.isArray(actualResult.bands);
+            assert.deepEqual(actualResult.bands, ['Metallica', 'Megadeth', 'Slayer']);
+          });
+          it('should contain a single value from a group of radio buttons', () => {
+            assert.strictEqual(actualResult.genre, 'Metal');
+          });
+          it('should contain a single value from a select list', () => {
+            assert.strictEqual(actualResult.headphones, 'Motorheadphones');
+          });
+          it('should store an array of values from a multi-select list', () => {
+            assert.isArray(actualResult.player);
+            assert.deepEqual(actualResult.player, ['Computer', 'Portable']);
+          });
+          it('should contain a single value from a textarea', () => {
+            assert.strictEqual(actualResult.lyrics, 'Nobody gives a damn about anybody else,\nThink everyone should feel the way they fell themselves,\nRich men think that happiness is a million dollar bills,\nSo how come most of them O. D. on sleeping pills...');
+          });
+        });
+
+        describe('Get Form Data minus exclusions', function () {
+          var actualResult = objectify(
+            form,
+            [ 'hiddenField',
+              'readOnly',
+              'disabled',
+              'color',
+              'date',
+              'datetime',
+              'datetime-local',
+              'month',
+              'week',
+              'number',
+              'range',
+              'search',
+              'time',
+              'url',
+              'bands',
+              'genre',
+              'headphones',
+              'player',
+              'lyrics'
+            ]
+          );
+          var expectedResult = {
+            name: 'John Doe',
+            tel: '2125551212',
+            email: 'jdoe@gmail.com'
+          };
+
+          it('should contain name, telephone and email only', () => {
+            assert.isObject(actualResult);
+            assert.deepEqual(actualResult, expectedResult);
+          });
+        });
+
+        describe('Get Sanitized Form Data', function () {
+          var actualResult = objectify(
+            form,
+            [ 'hiddenField',
+              'readOnly',
+              'disabled',
+              'color',
+              'date',
+              'datetime',
+              'datetime-local',
+              'month',
+              'week',
+              'number',
+              'range',
+              'search',
+              'time',
+              'url',
+              'bands',
+              'genre',
+              'headphones',
+              'player',
+              'lyrics'
+            ],
+            {
+              name: function(val) {
+                return val.replace('Doe', 'Johnson');
+              },
+              tel: function(val) {
+                return val.replace(/^(.{3})(.{3})/, '$1 $2-');
+              }
+            }
+          );
+          var expectedResult = {
+            name: 'John Johnson',
+            tel: '212 555-1212',
+            email: 'jdoe@gmail.com'
+          };
+
+          it('should contain the transformed form data', () => {
+            assert.isObject(actualResult);
+            assert.deepEqual(actualResult, expectedResult);
+          });
+          it('should transform supplied name, `John Doe` to `John Johnson`', () => {
+            assert.strictEqual(actualResult.name, expectedResult.name);
+          });
+          it('should transform supplied tel, `2125551212` to `212 555-1212`', () => {
+            assert.strictEqual(actualResult.tel, expectedResult.tel);
+          });
+        });
+      });
+
+    mocha.run();
+  </script>
+
+</body>
+</html>
