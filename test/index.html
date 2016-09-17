@@ -72,36 +72,77 @@ So how come most of them O. D. on sleeping pills...</textarea>
       describe('Objectify', () => {
         describe('Get Simple Form Data', function () {
           const actualResult = objectify(form);
-          var expectedResult = {
-            hiddenField: 'Hidden Field Value',
-            name: 'John Doe',
-            readOnly: 'Read Only',
-            disabled: 'Disabled Field',
-            tel: '2125551212',
-            color: '#0085bf',
-            date: '1974-03-16',
-            datetime: '1974-03-16T22:00:00',
-            'datetime-local': '1974-03-16T22:00:00',
-            email: 'jdoe@gmail.com',
-            month: '2016-02',
-            week: '2016-W27',
-            number: '5',
-            range: '500',
-            search: 'Search Input',
-            time: '01:59:27',
-            url: 'http://www.example.com',
-            bands: ['Metallica', 'Megadeth', 'Slayer'],
-            genre: 'Metal',
-            headphones: 'Motorheadphones',
-            player: ['Computer', 'Portable'],
-            lyrics: 'Nobody gives a damn about anybody else,\nThink everyone should feel the way they fell themselves,\nRich men think that happiness is a million dollar bills,\nSo how come most of them O. D. on sleeping pills...'
-          };
 
           it('should return an object', function () {
             assert.isObject(actualResult);
           });
-          it('should contain the expected form data', () => {
-            assert.deepEqual(actualResult, expectedResult);
+          it('should contain data from a hidden form field', () => {
+            assert.strictEqual(actualResult.hiddenField, 'Hidden Field Value');
+          });
+          it('should contain a `name` value from a text input', () => {
+            assert.strictEqual(actualResult.name, 'John Doe');
+          });
+          it('should contain a `read only` value from a readOnly text field', () => {
+            assert.strictEqual(actualResult.readOnly, 'Read Only');
+          });
+          it('should contain a `disabled` value from a disabled field', () => {
+            assert.strictEqual(actualResult.disabled, 'Disabled Field');
+          });
+          it('should contain the value of a `tel` field', () => {
+            assert.strictEqual(actualResult.tel, '2125551212');
+          });
+          it('should contain the value of a `color` field', () => {
+            assert.strictEqual(actualResult.color, '#0085bf');
+          });
+          it('should contain the value of a `date` field', () => {
+            assert.strictEqual(actualResult.date, '1974-03-16');
+          });
+          it('should contain the value of a `datetime` field', () => {
+            assert.strictEqual(actualResult.datetime, '1974-03-16T22:00:00');
+          });
+          it('should contain the value of a `datetime-local` field', () => {
+            assert.strictEqual(actualResult['datetime-local'], '1974-03-16T22:00:00');
+          });
+          it('should contain the value of an `email` field', () => {
+            assert.strictEqual(actualResult.email, 'jdoe@gmail.com');
+          });
+          it('should contain the value of a `month` field', () => {
+            assert.strictEqual(actualResult.month, '2016-02');
+          });
+          it('should contain the value of a `week` field', () => {
+            assert.strictEqual(actualResult.week, '2016-W27');
+          });
+          it('should contain the value of a `number` field', () => {
+            assert.strictEqual(actualResult.number, '5');
+          });
+          it('should contain the value of a `range` field', () => {
+            assert.strictEqual(actualResult.range, '500');
+          });
+          it('should contain the value of a `search` field', () => {
+            assert.strictEqual(actualResult.search, 'Search Input');
+          });
+          it('should contain the value of a `time` field', () => {
+            assert.strictEqual(actualResult.time, '01:59:27');
+          });
+          it('should contain the value of a `url` field', () => {
+            assert.strictEqual(actualResult.url, 'http://www.example.com');
+          });
+          it('should store an array of values from a group of check boxes', () => {
+            assert.isArray(actualResult.bands);
+            assert.deepEqual(actualResult.bands, ['Metallica', 'Megadeth', 'Slayer']);
+          });
+          it('should contain a single value from a group of radio buttons', () => {
+            assert.strictEqual(actualResult.genre, 'Metal');
+          });
+          it('should contain a single value from a select list', () => {
+            assert.strictEqual(actualResult.headphones, 'Motorheadphones');
+          });
+          it('should store an array of values from a multi-select list', () => {
+            assert.isArray(actualResult.player);
+            assert.deepEqual(actualResult.player, ['Computer', 'Portable']);
+          });
+          it('should contain a single value from a textarea', () => {
+            assert.strictEqual(actualResult.lyrics, 'Nobody gives a damn about anybody else,\nThink everyone should feel the way they fell themselves,\nRich men think that happiness is a million dollar bills,\nSo how come most of them O. D. on sleeping pills...');
           });
         });
 
