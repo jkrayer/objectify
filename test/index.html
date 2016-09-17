@@ -147,69 +147,88 @@ So how come most of them O. D. on sleeping pills...</textarea>
         });
 
         describe('Get Form Data minus exclusions', function () {
-          var actualResult = objectify(form, ['hiddenField', 'tel']);
+          var actualResult = objectify(
+            form,
+            [ 'hiddenField',
+              'readOnly',
+              'disabled',
+              'color',
+              'date',
+              'datetime',
+              'datetime-local',
+              'month',
+              'week',
+              'number',
+              'range',
+              'search',
+              'time',
+              'url',
+              'bands',
+              'genre',
+              'headphones',
+              'player',
+              'lyrics'
+            ]
+          );
           var expectedResult = {
             name: 'John Doe',
-            readOnly: 'Read Only',
-            disabled: 'Disabled Field',
-            color: '#0085bf',
-            date: '1974-03-16',
-            datetime: '1974-03-16T22:00:00',
-            'datetime-local': '1974-03-16T22:00:00',
-            email: 'jdoe@gmail.com',
-            month: '2016-02',
-            week: '2016-W27',
-            number: '5',
-            range: '500',
-            search: 'Search Input',
-            time: '01:59:27',
-            url: 'http://www.example.com',
-            bands: ['Metallica', 'Megadeth', 'Slayer'],
-            genre: 'Metal',
-            headphones: 'Motorheadphones',
-            player: ['Computer', 'Portable'],
-            lyrics: 'Nobody gives a damn about anybody else,\nThink everyone should feel the way they fell themselves,\nRich men think that happiness is a million dollar bills,\nSo how come most of them O. D. on sleeping pills...'
+            tel: '2125551212',
+            email: 'jdoe@gmail.com'
           };
 
-          it('should contain the expected form data', () => {
+          it('should contain name, telephone and email only', () => {
+            assert.isObject(actualResult);
             assert.deepEqual(actualResult, expectedResult);
           });
         });
 
         describe('Get Sanitized Form Data', function () {
-          var actualResult = objectify(form, ['hiddenField', 'tel'], {
-            name: function(val) {
-              return val.replace('Doe', 'Johnson');
-            },
-            color: function(val) {
-              return val.replace('00', 'ff');
+          var actualResult = objectify(
+            form,
+            [ 'hiddenField',
+              'readOnly',
+              'disabled',
+              'color',
+              'date',
+              'datetime',
+              'datetime-local',
+              'month',
+              'week',
+              'number',
+              'range',
+              'search',
+              'time',
+              'url',
+              'bands',
+              'genre',
+              'headphones',
+              'player',
+              'lyrics'
+            ],
+            {
+              name: function(val) {
+                return val.replace('Doe', 'Johnson');
+              },
+              tel: function(val) {
+                return val.replace(/^(.{3})(.{3})/, '$1 $2-');
+              }
             }
-          });
+          );
           var expectedResult = {
             name: 'John Johnson',
-            readOnly: 'Read Only',
-            disabled: 'Disabled Field',
-            color: '#ff85bf',
-            date: '1974-03-16',
-            datetime: '1974-03-16T22:00:00',
-            'datetime-local': '1974-03-16T22:00:00',
-            email: 'jdoe@gmail.com',
-            month: '2016-02',
-            week: '2016-W27',
-            number: '5',
-            range: '500',
-            search: 'Search Input',
-            time: '01:59:27',
-            url: 'http://www.example.com',
-            bands: ['Metallica', 'Megadeth', 'Slayer'],
-            genre: 'Metal',
-            headphones: 'Motorheadphones',
-            player: ['Computer', 'Portable'],
-            lyrics: 'Nobody gives a damn about anybody else,\nThink everyone should feel the way they fell themselves,\nRich men think that happiness is a million dollar bills,\nSo how come most of them O. D. on sleeping pills...'
+            tel: '212 555-1212',
+            email: 'jdoe@gmail.com'
           };
 
-          it('should contain the expected form data', () => {
+          it('should contain the transformed form data', () => {
+            assert.isObject(actualResult);
             assert.deepEqual(actualResult, expectedResult);
+          });
+          it('should transform supplied name, `John Doe` to `John Johnson`', () => {
+            assert.strictEqual(actualResult.name, expectedResult.name);
+          });
+          it('should transform supplied tel, `2125551212` to `212 555-1212`', () => {
+            assert.strictEqual(actualResult.tel, expectedResult.tel);
           });
         });
       });
