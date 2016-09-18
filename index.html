@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Objectify v0.2.2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Simple Form</h2>
+        <form action="" id="formone" novalidate="">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" value="Jim Krayer" />
+          </div>
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input type="url" name="url" id="url" value="jameskayer.com/" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="jameskrayer@yahoo.com" class="form-control" />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <textarea id="formone-output" class="form-control" rows="5"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Exclude Field</h2>
+        <form action="" id="formtwo" novalidate="">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" value="Jim Krayer" />
+          </div>
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input type="url" name="url" id="url" value="jameskayer.com/" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="jameskrayer@yahoo.com" class="form-control" />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <textarea id="formtwo-output" class="form-control" rows="5"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Sanatize Field</h2>
+        <form action="" id="formthree" novalidate="">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" value="Jim Krayer" />
+          </div>
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input type="url" name="url" id="url" value="jameskayer.com/" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="jameskrayer@yahoo.com" class="form-control" />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <textarea id="formthree-output" class="form-control" rows="5"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="dist/objectify.min.js"></script>
+  <script>
+    function formatter(object) {
+      var result = '{\n';
+      for (var key in object) {
+        result += ['  ', key, ': ', object[key], ',\n'].join('');
+      }
+      return result.replace(/,\n$/, '\n}');
+    }
+
+    //form one
+    (function() {
+      var form = document.getElementById('formone');
+      var output = document.getElementById('formone-output');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        output.value = formatter(objectify(form));
+      });
+    })();
+
+    //form two
+    (function() {
+      var form = document.getElementById('formtwo');
+      var output = document.getElementById('formtwo-output');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        output.value = formatter(objectify(form, ['email']));
+      });
+    })();
+
+    //form three
+    (function() {
+      var form = document.getElementById('formthree');
+      var output = document.getElementById('formthree-output');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        output.value = formatter(objectify(form, [], {
+          url: function(value) {
+            return value.replace(/\/$/, '');
+          }
+        }));
+      });
+    })();
+  </script>
+
+</body>
+</html>
