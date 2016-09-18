@@ -5,6 +5,16 @@
   <title>Objectify v0.2.2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style media="screen">
+    pre {
+       min-height: 3rem;
+    }
+    @media (min-width: 992px) {
+      h3 {
+        margin-top: 6.15rem !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -32,7 +42,8 @@
         </form>
       </div>
       <div class="col-md-6">
-        <textarea id="formone-output" class="form-control" rows="5"></textarea>
+        <h3 class="h5">Objectify Output</h3>
+        <pre id="formone-output"></pre>
       </div>
     </div>
 
@@ -58,7 +69,8 @@
         </form>
       </div>
       <div class="col-md-6">
-        <textarea id="formtwo-output" class="form-control" rows="5"></textarea>
+        <h3 class="h5">Objectify Output</h3>
+        <pre id="formtwo-output"></pre>
       </div>
     </div>
 
@@ -84,7 +96,8 @@
         </form>
       </div>
       <div class="col-md-6">
-        <textarea id="formthree-output" class="form-control" rows="5"></textarea>
+        <h3 class="h5">Objectify Output</h3>
+        <pre id="formthree-output"></pre>
       </div>
     </div>
 
@@ -107,7 +120,7 @@
 
       form.addEventListener('submit', function(event) {
         event.preventDefault();
-        output.value = formatter(objectify(form));
+        output.textContent = formatter(objectify(form));
       });
     })();
 
@@ -118,7 +131,7 @@
 
       form.addEventListener('submit', function(event) {
         event.preventDefault();
-        output.value = formatter(objectify(form, ['email']));
+        output.textContent = formatter(objectify(form, ['email']));
       });
     })();
 
@@ -129,7 +142,7 @@
 
       form.addEventListener('submit', function(event) {
         event.preventDefault();
-        output.value = formatter(objectify(form, [], {
+        output.textContent = formatter(objectify(form, [], {
           url: function(value) {
             return value.replace(/\/$/, '');
           }
