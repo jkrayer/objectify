@@ -4,6 +4,8 @@
 
 Returns form data as a javascript object using the input's name attribute for the key.
 
+See sample [http://jameskrayer.com/objectify/](http://jameskrayer.com/objectify/).
+
 ## window.objectify
 
 `objectify (form, exclusions, sanitize);` version added 0.1.1
